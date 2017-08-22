@@ -1,0 +1,8 @@
+export const SET_CITIES = 'SET_CITIES'
+export const SET_CITY_X = 'SET_CITY_X'
+export const SET_CITY = 'SET_CITY'
+export const CLEAR_CITY = 'CLEAR_CITY'
+export const SET_NUMBERS = 'SET_NUMBERS'
+export const SET_AREACODE = 'SET_AREACODE'
+export const SET_AREACODE_X = 'SET_AREACODE_X'
+export const AREACODE = 'AREACODE'
