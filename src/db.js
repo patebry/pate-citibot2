@@ -27,7 +27,13 @@ export const createCity = (dispatch, getState) => {
 		.then(data =>
 			dispatch({
 				type: SET_CITY,
-				payload: { name: '', _id: '', sites: '', description: '', content: '' }
+				payload: {
+					name: '',
+					_id: '',
+					sites: '',
+					description: '',
+					content: ''
+				}
 			})
 		)
 }
@@ -69,7 +75,6 @@ export const getCity = id => (dispatch, getState) => {
 
 export const removeCity = e => (dispatch, getState) => {
 	const city = getState().city
-	console.log('city', city)
 	fetch(
 		apiURL + '/cities/' + city._id,
 		getOptions(getState(), 'DELETE')
@@ -77,13 +82,6 @@ export const removeCity = e => (dispatch, getState) => {
 }
 
 export const getNumbers = areaCode => (dispatch, getState) => {
-	console.log('getNumbers', areaCode)
-	fetch(apiURL + '/numbers/' + areaCode, getOptions(getState()))
-		.then(res => res.json())
-		.then(data => dispatch({ type: SET_NUMBERS, payload: data }))
-}
-
-export const setNumber = areaCode => (dispatch, getState) => {
 	fetch(apiURL + '/numbers/' + areaCode, getOptions(getState()))
 		.then(res => res.json())
 		.then(data => dispatch({ type: SET_NUMBERS, payload: data }))

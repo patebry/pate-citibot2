@@ -1,73 +1,104 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { TextField, Button, ListItem, List } from 't63'
+import { TextField, ListItem, List } from 't63'
 import { connect } from 'react-redux'
-import { getNumbers, setNumber } from '../../db.js'
-import { toUpper, map, pathOr } from 'ramda'
-import { SET_AREACODE_X, AREACODE } from '../../constants'
-
-const li = numbers => {
-	return (
-		<ListItem>
-			<div className="f5 black">
-				<h3>{numbers}</h3>
-				<h5>copy number and paste on previous page</h5>
-			</div>
-		</ListItem>
-	)
-}
+import { getNumbers } from '../../db.js'
+import { toUpper, map } from 'ramda'
+import { SET_AREACODE_X, AREACODE, SET_CITY_X } from '../../constants'
 
 class SearchPhoneNumbers extends React.Component {
 	componentDidMount() {
-		console.log('this.props', this.props)
 		this.props.dispatch(getNumbers)
 	}
+	login() {
+		this.props.auth.login()
+	}
 	render() {
+		const props = this.props
+		const { isAuthenticated } = props.auth
+		function li(numbers) {
+			return (
+				<ListItem key={numbers}>
+					<div className="f5 black">
+						<h3>{numbers}</h3>
+						<Link to={`/cities/new?${numbers}`}>
+							<a className="f6 link grow ba ph3 pv2 mb2 dib black center">
+								Use
+							</a>
+						</Link>
+					</div>
+				</ListItem>
+			)
+		}
 		return (
-			<div className="flex flex-column justify-start avenir w-100">
-				<header className="h3 flex justify-between items-center bg-light-blue">
-					<div className="ml2">
-						<Link to="/cities/new">
-							<Button className="bg-dark-blue">
-								back
-							</Button>
-						</Link>
+			<div>
+				{isAuthenticated() && (
+					<div className="flex flex-column justify-start avenir w-100">
+						<header className="h3 flex justify-between items-center">
+							<div className="ml2">
+								<Link to="/cities/new">
+									<a className="f6 link grow ba ph3 pv2 mb2 dib black">back</a>
+								</Link>
+							</div>
+							<div className="pt3">
+								<img
+									src="https://www.citibot.io/img/citibot-logo.svg"
+									alt="citibot"
+									width="300"
+								/>
+							</div>
+							<div className="mr2">
+								<Link to="/cities">
+									<a className="f6 link grow ba ph3 pv2 mb2 dib black">home</a>
+								</Link>
+							</div>
+						</header>
+						<main className="overflow-scroll">
+							<h2 className="f4 f2-ns">Create City</h2>
+							<form className="ph2">
+								<TextField
+									name="Area Code"
+									value={props.areaCode.areaCode}
+									onChange={props.handleAreaCode}
+								/>
+								<div className="">
+									<List className="fl">{map(li, props.numbers)}</List>
+								</div>
+							</form>
+						</main>
 					</div>
-					<div className="f4">Citibot</div>
-					<div className="mr2">
-						<Link to="/cities">
-							<Button className="bg-dark-blue">
-								home
-							</Button>
-						</Link>
-					</div>
-				</header>
-				<main className="overflow-scroll">
-					<h2 className="f4 f2-ns">Create City</h2>
-					<form className="ph2">
-						<TextField
-							name="Area Code"
-							value={this.props.areaCode.areaCode}
-							onChange={this.props.handleAreaCode}
-						/>
-						<div className="">
-							<List className="fl">
-								{map(li, this.props.numbers)}
-							</List>
+				)}
+				{!isAuthenticated() && (
+					<div className="mw7 center ph5-ns tc br2 pv3 avenir">
+						<div className="center">
+							<img
+								src="https://www.citibot.io/img/citibot-logo.svg"
+								alt="citibot"
+								width="300"
+							/>
 						</div>
-					</form>
-				</main>
+						<h4 className="fw6 f3 f2-ns lh-title mt0 mb3 pt2">
+							You are not logged in, Please login to continue.
+						</h4>
+						<a
+							style={{ cursor: 'pointer' }}
+							className="f6 link grow ba pa3 pv2 mb2 dib black"
+							onClick={this.login.bind(this)}
+						>
+							Log In
+						</a>
+					</div>
+				)}
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = state => {
-	console.log('state', state)
 	return {
 		numbers: state.numbers,
-		number: state.number,
-		areaCode: state.areaCode
+		areaCode: state.areaCode,
+		_id: state.city._id
 	}
 }
 
@@ -78,18 +109,23 @@ const mapActionsToProps = dispatch => {
 			payload: value
 		})
 	}
+	const dispatchCity = (field, value) => {
+		dispatch({
+			type: SET_CITY_X + toUpper(field),
+			payload: value
+		})
+	}
+
 	return {
 		dispatch,
-		useNumber: number => {
-			dispatch(setNumber(number))
-		},
 		handleAreaCode: e => {
 			doDispatch(AREACODE, e.target.value)
 			dispatch(getNumbers(e.target.value))
 		},
 		handleSearch: e => {
 			dispatch(getNumbers(e.target.value))
-		}
+		},
+		handleId: e => dispatchCity('_ID', e)
 	}
 }
 

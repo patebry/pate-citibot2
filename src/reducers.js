@@ -10,7 +10,6 @@ import {
 import { combineReducers } from 'redux'
 import R from 'ramda'
 const { merge } = R
-
 export default combineReducers({
 	cities,
 	city,
@@ -47,33 +46,62 @@ function numbers(state = [], action) {
 }
 
 function city(
-	state = { name: '', _id: '', sites: '', content: '', description: '' },
+	state = {
+		name: '',
+		_id: '',
+		sites: '',
+		content: '',
+		description: ''
+	},
 	action
 ) {
 	switch (action.type) {
 		case SET_CITY_X + 'NAME':
-			return merge(state, { name: action.payload })
+			return merge(state, {
+				name: action.payload
+			})
 		case SET_CITY_X + '_ID':
-			return merge(state, { _id: action.payload })
+			return merge(state, {
+				_id: action.payload
+			})
 		case SET_CITY_X + 'SITES':
-			return merge(state, { sites: action.payload })
+			return merge(state, {
+				sites: [action.payload]
+			})
 		case SET_CITY_X + 'DESCRIPTION':
-			return merge(state, { description: action.payload })
+			return merge(state, {
+				description: action.payload
+			})
 		case SET_CITY_X + 'CONTENT':
-			return merge(state, { content: action.payload })
+			return merge(state, {
+				content: action.payload
+			})
 		case SET_CITY:
 			return action.payload
 		case CLEAR_CITY:
-			return { name: '', _id: '', sites: '', content: '', description: '' }
+			return {
+				name: '',
+				_id: '',
+				sites: '',
+				content: '',
+				description: ''
+			}
 		default:
 			return state
 	}
 }
 
-function areaCode(state = { areaCode: '' }, action) {
+function areaCode(
+	state = {
+		areaCode: ''
+	},
+	action
+) {
 	switch (action.type) {
 		case SET_AREACODE_X + 'AREACODE':
-			return merge(state, { areaCode: action.payload })
+			return merge(state, {
+				areaCode: action.payload
+			})
 		default:
 			return state
 	}

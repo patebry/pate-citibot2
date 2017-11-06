@@ -1,24 +1,27 @@
 {
-  "name": "pate-citibot",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.1.2",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "t63": "^1.3.1",
-    "tachyons": "^4.8.1"
-  },
-  "devDependencies": {
-    "react-scripts": "1.0.11"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+	"name": "pate-citibot",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"auth0": "^2.7.0",
+		"auth0-js": "^8.10.1",
+		"history": "^4.7.2",
+		"react": "^15.6.1",
+		"react-dom": "^15.6.1",
+		"react-redux": "^5.0.6",
+		"react-router-dom": "^4.1.2",
+		"redux": "^3.7.2",
+		"redux-thunk": "^2.2.0",
+		"t63": "^1.3.1",
+		"tachyons": "^4.8.1"
+	},
+	"devDependencies": {
+		"react-scripts": "1.0.11"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	}
 }

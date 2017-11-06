@@ -1,6 +1,25 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script type="text/javascript">;
+  !function(name,path,ctx){
+    var latest,prev=name!=='Keen'&&window.Keen?window.Keen:false;ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;latest=w.Keen;if(prev){w.Keen=prev}else{try{delete w.Keen}catch(e){w.Keen=void 0}}ctx[name]=latest;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}
+  }('KeenAsync','https://d26b395fwzu5fz.cloudfront.net/keen-tracking-1.2.1.min.js',this);
+
+  KeenAsync.ready(function(){
+    // Configure a client instance
+    // This is your actual Project ID and Write Key
+    var client = new KeenAsync({
+      projectId: '59c16821c9e77c0001571fa7',
+      writeKey: '04D0DBA7A900EE97D12ABE20986D519D73D1DF4FCEEF39D54739122F2AE561B24248467B90534F93F5A3A202CB0FDEF86AF7A382B1C6997C8330BECF10B92CE0502A6D3B60FA451121A2382AFE276C7ACC03E33DE879A4FE81151CCC0C7050F0'
+    });
+
+    // Record an event
+    client.recordEvent('pageviews', {
+      title: document.title
+    });
+  });
+</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
@@ -22,6 +41,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
     <title>React App</title>
   </head>
   <body>
