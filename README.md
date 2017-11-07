@@ -8,8 +8,9 @@ First change into the directory you want this application to be stored in
 
 Next in the terminal run the code (git needs to be installed)
 
-`git clone https://github.com/patebry/pate-citibot2.git (directory name)
-`
+```
+git clone https://github.com/patebry/pate-citibot2.git (directory name)
+```
 
 This will clone the repository into the `(directory name)` you choose
 
@@ -24,7 +25,8 @@ Inside of the src directory there is a file called auth0-variables.js. This is w
 
 The contents of the file look like this
 
-```export const AUTH_CONFIG = {
+```
+export const AUTH_CONFIG = {
   domain: '',
   clientId: '',
   callbackUrl: ''
@@ -41,6 +43,8 @@ The app will function but there will be no data if the api is not run at the sam
 
 Clone the repository form Github with this code in your terminal
 
-`git clone https://github.com/patebry/pate-citibot-api.git (directory name)`
+```
+git clone https://github.com/patebry/pate-citibot-api.git (directory name)
+```
 
 Use the README.md file on its repository for more instructions on setting up the api
