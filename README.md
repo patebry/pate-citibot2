@@ -14,11 +14,11 @@ git clone https://github.com/patebry/pate-citibot2.git (directory name)
 
 This will clone the repository into the `(directory name)` you choose
 
-Now  change directories with the code `cd (directory name)`
+Now change directories with the code `cd (directory name)`
 
 ## Dependencies
 To install all of the dependencies run `yarn install` or `npm install -S`
-This will add all of the dependencies in a package.json file
+This will add all of the dependencies in the package.json file into a node-modules folder
 
 ## Setting up Auth0 variables
 Inside of the src directory there is a file called auth0-variables.js. This is where you can set up your auth0 variables to be used in the app.
@@ -38,8 +38,14 @@ Fill in the domain key with your auth0 user URL. The clientID can be found on yo
 ## Starting the app
 run the command `yarn start` or `npm start` to start the app on port 3000
 
-## Getting the api
+## Connecting the API
 The app will function but there will be no data if the api is not run at the same time!
+
+The db.js file in the src directory stores the api link for the app to use. This is where you can change the api for this app to call to. It is by default set to call to port 4000 which is what the API is set to.
+
+```
+const apiURL = 'http://localhost:4000'
+```
 
 Clone the repository form Github with this code in your terminal
 
