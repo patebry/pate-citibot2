@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch'
 import { SET_CITIES, SET_CITY, SET_NUMBERS } from './constants'
-require('dotenv').config()
 
 const apiURL = 'http://localhost:4000'
 
