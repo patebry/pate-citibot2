@@ -17,7 +17,7 @@ This will clone the repository into the `(directory name)` you choose
 Now  change directories with the code `cd (directory name)`
 
 ## Dependencies
-To install all of the dependencies run `yarn add` or `npm install -S`
+To install all of the dependencies run `yarn install` or `npm install -S`
 This will add all of the dependencies in a package.json file
 
 ## Setting up Auth0 variables
