@@ -5,7 +5,9 @@ import {
 	SET_AREACODE,
 	SET_AREACODE_X,
 	SET_CITY,
-	CLEAR_CITY
+	CLEAR_CITY,
+	CLEAR_NUMBER,
+	CLEAR_NUMBERS
 } from './constants'
 import { combineReducers } from 'redux'
 import R from 'ramda'
@@ -102,6 +104,10 @@ function areaCode(
 			return merge(state, {
 				areaCode: action.payload
 			})
+		case CLEAR_NUMBER:
+			return { areaCode: '' }
+		case CLEAR_NUMBERS:
+			return { numbers: '' }
 		default:
 			return state
 	}

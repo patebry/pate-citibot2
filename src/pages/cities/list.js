@@ -4,7 +4,7 @@ import { List, ListItem } from 't63'
 import { connect } from 'react-redux'
 import { map } from 'ramda'
 import { listCities } from '../../db.js'
-import { CLEAR_CITY } from '../../constants.js'
+import { CLEAR_CITY, CLEAR_NUMBER, CLEAR_NUMBERS } from '../../constants.js'
 
 const li = city => {
 	return (
@@ -31,6 +31,8 @@ class ListCities extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(listCities)
 		this.props.dispatch({ type: CLEAR_CITY })
+		this.props.dispatch({ type: CLEAR_NUMBER })
+		this.props.dispatch({ type: CLEAR_NUMBERS })
 	}
 
 	login() {
@@ -70,7 +72,9 @@ class ListCities extends React.Component {
 							</div>
 						</header>
 						<main className="vh-100 overflow-scroll">
-							<List className="bg-light-gray pa2">{map(li, props.cities)}</List>
+							<List className="bg-light-gray pa2">
+								{(this.props.dispatch(listCities), map(li, props.cities))}
+							</List>
 						</main>
 					</div>
 				)}
