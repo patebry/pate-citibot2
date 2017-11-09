@@ -54,7 +54,7 @@ class SearchPhoneNumbers extends React.Component {
 							</div>
 						</header>
 						<main className="overflow-scroll">
-							<h2 className="f4 f2-ns">Create City</h2>
+							<h2 className="f4 f2-ns pa2">Select Number</h2>
 							<form className="ph2">
 								<TextField
 									name="Area Code"

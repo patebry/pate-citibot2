@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import R from 'ramda'
 import { updateCity, getCity } from '../../db.js'
 import { SET_CITY_X } from '../../constants'
+import history from '../../history'
+import { createBrowserHistory } from 'history'
+
 const { toUpper } = R
 
 class EditCity extends React.Component {
@@ -41,7 +44,7 @@ class EditCity extends React.Component {
 								<Link to={'/cities'}>
 									<a
 										className="f6 link ba ph3 pv2 mb2 dib black"
-										onClick={props.submitCity(props._id)}
+										onClick={props.submitCity(props)}
 									>
 										save
 									</a>
@@ -49,7 +52,7 @@ class EditCity extends React.Component {
 							</div>
 						</header>
 						<main className="overflow-scroll">
-							<h2 className="f4 f2-ns">Edit City</h2>
+							<h2 className="f4 f2-ns pa2">Edit City</h2>
 							<form className="ph2">
 								<TextField
 									value={props.name}
@@ -79,7 +82,7 @@ class EditCity extends React.Component {
 									<Link to="/cities">
 										<a
 											className="w-100 f6 link grow ba ph3 pv2 mb2 dib tc black"
-											onClick={props.submitCity(props._id)}
+											onClick={props.submitCity(props)}
 										>
 											Save City
 										</a>
@@ -124,8 +127,20 @@ function mapActionsToProps(dispatch) {
 	}
 	return {
 		dispatch,
-		submitCity: id => {
-			return e => dispatch(updateCity(id))
+		submitCity: props => {
+			return e => {
+				if (
+					props._id !== '' &&
+					props.name.length !== 0 &&
+					props.sites[0].length !== 0
+				) {
+					dispatch(updateCity(props._id))
+				} else {
+					if (window.confirm('All of the required forms were not filled in.')) {
+						return <Link to={'cities/edit/' + props._id} />
+					}
+				}
+			}
 		},
 		handleName: e => doDispatch('NAME', e.target.value),
 		handleId: e => doDispatch('_ID', e),

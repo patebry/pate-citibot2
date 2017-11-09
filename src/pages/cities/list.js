@@ -106,7 +106,12 @@ class ListCities extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		cities: state.cities
+		cities: state.cities,
+		name: state.city.name,
+		_id: state.city._id,
+		sites: state.city.sites,
+		description: state.city.description,
+		content: state.city.content
 	}
 }
 

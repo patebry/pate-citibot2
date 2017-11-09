@@ -4,10 +4,16 @@ import { TextField } from 't63'
 import { connect } from 'react-redux'
 import R from 'ramda'
 import { createCity } from '../../db.js'
-import { SET_CITY_X } from '../../constants'
+import { SET_CITY_X, CLEAR_NUMBER, CLEAR_NUMBERS } from '../../constants'
+import history from '../../history'
 const { toUpper } = R
 
 class AddCity extends React.Component {
+	componentDidMount() {
+		this.props.dispatch({ type: CLEAR_NUMBER })
+		this.props.dispatch({ type: CLEAR_NUMBERS })
+	}
+
 	login() {
 		this.props.auth.login()
 	}
@@ -36,7 +42,7 @@ class AddCity extends React.Component {
 								<Link to={'/cities'}>
 									<a
 										className="f6 link grow ba ph3 pv2 mb2 dib black"
-										onClick={props.submitCity(props._id)}
+										onClick={props.submitCity(props)}
 									>
 										save
 									</a>
@@ -44,7 +50,7 @@ class AddCity extends React.Component {
 							</div>
 						</header>
 						<main className="overflow-scroll">
-							<h2 className="f4 f2-ns">Add City</h2>
+							<h2 className="f4 f2-ns pa2">Add City</h2>
 							<form className="ph2">
 								<TextField
 									value={props.name}
@@ -85,7 +91,7 @@ class AddCity extends React.Component {
 								<Link to="/cities">
 									<a
 										className="w-100 f6 link grow ba ph3 pv2 mb2 dib tc black"
-										onClick={props.submitCity(props._id)}
+										onClick={props.submitCity(props)}
 									>
 										Save City
 									</a>
@@ -129,8 +135,10 @@ function mapActionsToProps(dispatch) {
 	}
 	return {
 		dispatch,
-		submitCity: id => {
-			return e => dispatch(createCity)
+		submitCity: props => {
+			return e => {
+				dispatch(createCity)
+			}
 		},
 		handleName: e => doDispatch('NAME', e.target.value),
 		handleId: e => doDispatch('_ID', e),
