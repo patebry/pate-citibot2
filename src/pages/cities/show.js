@@ -1,13 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { List, ListItem } from 't63'
-import { connect } from 'react-redux'
-import { getCity, removeCity } from '../../db.js'
+import history from '../../history'
+const React = require('react')
+const { Link } = require('react-router-dom')
+const { List, ListItem } = require('t63')
+const { connect } = require('react-redux')
+const { getCity, removeCity } = require('../../db.js')
+const CLEAR_NUMBERS = require('../../constants')
 
 class ShowCity extends React.Component {
 	componentDidMount() {
 		const cityId = this.props.match.params.id
 		this.props.dispatch(getCity(cityId))
+		this.props.dispatch({ type: CLEAR_NUMBERS })
 	}
 
 	login() {
@@ -59,14 +62,12 @@ class ShowCity extends React.Component {
 								</ListItem>
 							</List>
 							<div className="center w-10">
-								<Link to="/cities">
-									<a
-										className="f6 link grow ba ph3 pv2 mb2 tc dib dark-red "
-										onClick={props.handleRemoveCity}
-									>
-										Remove City
-									</a>
-								</Link>
+								<a
+									className="f6 link grow ba ph3 pv2 mb2 tc dib dark-red "
+									onClick={props.handleRemoveCity}
+								>
+									Remove City
+								</a>
 							</div>
 						</main>
 					</div>
@@ -100,7 +101,8 @@ class ShowCity extends React.Component {
 const mapStateToProps = state => {
 	return {
 		city: state.city,
-		cities: state.cities
+		cities: state.cities,
+		numbers: state.numbers
 	}
 }
 
@@ -114,6 +116,7 @@ const mapActionsToProps = dispatch => {
 				)
 			) {
 				dispatch(removeCity())
+				history.push('/cities')
 			}
 		}
 	}

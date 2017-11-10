@@ -1,12 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { TextField } from 't63'
-import { connect } from 'react-redux'
-import R from 'ramda'
-import { updateCity, getCity } from '../../db.js'
-import { SET_CITY_X } from '../../constants'
 import history from '../../history'
-import { createBrowserHistory } from 'history'
+const React = require('react')
+const { Link } = require('react-router-dom')
+const { TextField } = require('t63')
+const { connect } = require('react-redux')
+const R = require('ramda')
+const { updateCity, getCity } = require('../../db.js')
+const { SET_CITY_X } = require('../../constants')
 
 const { toUpper } = R
 
@@ -79,14 +78,12 @@ class EditCity extends React.Component {
 									name="Phone number (cannot be changed)"
 								/>
 								<div className="">
-									<Link to="/cities">
-										<a
-											className="w-100 f6 link grow ba ph3 pv2 mb2 dib tc black"
-											onClick={props.submitCity(props)}
-										>
-											Save City
-										</a>
-									</Link>
+									<a
+										className="w-100 f6 link grow ba ph3 pv2 mb2 dib tc black"
+										onClick={props.submitCity(props)}
+									>
+										Save City
+									</a>
 								</div>
 							</form>
 						</main>
@@ -132,13 +129,14 @@ function mapActionsToProps(dispatch) {
 				if (
 					props._id !== '' &&
 					props.name.length !== 0 &&
-					props.sites[0].length !== 0
+					props.sites[0].length !== 0 &&
+					props.content.length !== 0 &&
+					props.description.length !== 0
 				) {
 					dispatch(updateCity(props._id))
+					history.push('/cities')
 				} else {
-					if (window.confirm('All of the required forms were not filled in.')) {
-						return <Link to={'cities/edit/' + props._id} />
-					}
+					window.alert('Please fill in every field to save a city.')
 				}
 			}
 		},

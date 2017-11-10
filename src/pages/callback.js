@@ -1,5 +1,5 @@
-import React from 'react'
-import loading from './loading.svg'
+const React = require('react')
+const loading = require('./loading.svg')
 
 class Callback extends React.Component {
 	render() {

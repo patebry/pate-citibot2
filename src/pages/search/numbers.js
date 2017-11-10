@@ -1,14 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { TextField, ListItem, List } from 't63'
-import { connect } from 'react-redux'
-import { getNumbers } from '../../db.js'
-import { toUpper, map } from 'ramda'
-import { SET_AREACODE_X, AREACODE, SET_CITY_X } from '../../constants'
+const React = require('react')
+const { Link } = require('react-router-dom')
+const { TextField, ListItem, List } = require('t63')
+const { connect } = require('react-redux')
+const { getNumbers } = require('../../db.js')
+const { toUpper, map } = require('ramda')
+const {
+	SET_AREACODE_X,
+	AREACODE,
+	SET_CITY_X,
+	CLEAR_NUMBERS,
+	CLEAR_AREACODE
+} = require('../../constants')
 
 class SearchPhoneNumbers extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(getNumbers)
+		this.props.dispatch({ type: CLEAR_NUMBERS })
+		this.props.dispatch({ type: CLEAR_AREACODE })
 	}
 	login() {
 		this.props.auth.login()
@@ -109,7 +117,7 @@ const mapActionsToProps = dispatch => {
 			payload: value
 		})
 	}
-	const dispatchCity = (field, value) => {
+	const dispatchId = (field, value) => {
 		dispatch({
 			type: SET_CITY_X + toUpper(field),
 			payload: value
@@ -125,7 +133,7 @@ const mapActionsToProps = dispatch => {
 		handleSearch: e => {
 			dispatch(getNumbers(e.target.value))
 		},
-		handleId: e => dispatchCity('_ID', e)
+		handleId: e => dispatchId('_ID', e)
 	}
 }
 

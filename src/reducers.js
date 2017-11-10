@@ -1,4 +1,4 @@
-import {
+const {
 	SET_CITIES,
 	SET_NUMBERS,
 	SET_CITY_X,
@@ -6,11 +6,11 @@ import {
 	SET_AREACODE_X,
 	SET_CITY,
 	CLEAR_CITY,
-	CLEAR_NUMBER,
-	CLEAR_NUMBERS
-} from './constants'
-import { combineReducers } from 'redux'
-import R from 'ramda'
+	CLEAR_NUMBERS,
+	CLEAR_AREACODE
+} = require('./constants')
+const { combineReducers } = require('redux')
+const R = require('ramda')
 const { merge } = R
 export default combineReducers({
 	cities,
@@ -42,6 +42,8 @@ function numbers(state = [], action) {
 	switch (action.type) {
 		case SET_NUMBERS:
 			return action.payload
+		case CLEAR_NUMBERS:
+			return (numbers: [])
 		default:
 			return state
 	}
@@ -104,10 +106,10 @@ function areaCode(
 			return merge(state, {
 				areaCode: action.payload
 			})
-		case CLEAR_NUMBER:
-			return { areaCode: '' }
-		case CLEAR_NUMBERS:
-			return { numbers: '' }
+		case CLEAR_AREACODE:
+			return {
+				areaCode: ''
+			}
 		default:
 			return state
 	}

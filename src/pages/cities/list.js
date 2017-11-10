@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { List, ListItem } from 't63'
-import { connect } from 'react-redux'
-import { map } from 'ramda'
-import { listCities } from '../../db.js'
-import { CLEAR_CITY, CLEAR_NUMBER, CLEAR_NUMBERS } from '../../constants.js'
+const React = require('react')
+const { Link } = require('react-router-dom')
+const { List, ListItem } = require('t63')
+const { connect } = require('react-redux')
+const { map } = require('ramda')
+const { listCities } = require('../../db.js')
+const { CLEAR_CITY, CLEAR_NUMBERS } = require('../../constants.js')
 
 const li = city => {
 	return (
@@ -31,7 +31,6 @@ class ListCities extends React.Component {
 	componentDidMount() {
 		this.props.dispatch(listCities)
 		this.props.dispatch({ type: CLEAR_CITY })
-		this.props.dispatch({ type: CLEAR_NUMBER })
 		this.props.dispatch({ type: CLEAR_NUMBERS })
 	}
 
@@ -111,7 +110,8 @@ const mapStateToProps = state => {
 		_id: state.city._id,
 		sites: state.city.sites,
 		description: state.city.description,
-		content: state.city.content
+		content: state.city.content,
+		numbers: state.numbers
 	}
 }
 

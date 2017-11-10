@@ -1,6 +1,6 @@
+import App from './app'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './app'
 import registerServiceWorker from './registerServiceWorker'
 import store from './store.js'
 import { Provider } from 'react-redux'

@@ -16,7 +16,7 @@ export default class Auth {
 		this.auth0.authorize()
 	}
 
-	constructor() {
+	importructor() {
 		this.login = this.login.bind(this)
 		this.logout = this.logout.bind(this)
 		this.handleAuthentication = this.handleAuthentication.bind(this)
@@ -47,7 +47,7 @@ export default class Auth {
 	}
 
 	logout(props) {
-		// Clear access token and ID token from local storage
+		// Clear access token and ID token = local storage
 		localStorage.removeItem('access_token')
 		localStorage.removeItem('id_token')
 		localStorage.removeItem('expires_at')

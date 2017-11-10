@@ -1,16 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { TextField } from 't63'
-import { connect } from 'react-redux'
-import R from 'ramda'
-import { createCity } from '../../db.js'
-import { SET_CITY_X, CLEAR_NUMBER, CLEAR_NUMBERS } from '../../constants'
 import history from '../../history'
+const React = require('react')
+const { Link } = require('react-router-dom')
+const { TextField } = require('t63')
+const { connect } = require('react-redux')
+const R = require('ramda')
+const { createCity } = require('../../db.js')
+const { SET_CITY_X, CLEAR_NUMBERS } = require('../../constants')
 const { toUpper } = R
 
 class AddCity extends React.Component {
 	componentDidMount() {
-		this.props.dispatch({ type: CLEAR_NUMBER })
 		this.props.dispatch({ type: CLEAR_NUMBERS })
 	}
 
@@ -39,14 +38,12 @@ class AddCity extends React.Component {
 								/>
 							</div>
 							<div className="mr2">
-								<Link to={'/cities'}>
-									<a
-										className="f6 link grow ba ph3 pv2 mb2 dib black"
-										onClick={props.submitCity(props)}
-									>
-										save
-									</a>
-								</Link>
+								<a
+									className="f6 link grow ba ph3 pv2 mb2 dib black"
+									onClick={props.submitCity(props)}
+								>
+									save
+								</a>
 							</div>
 						</header>
 						<main className="overflow-scroll">
@@ -88,14 +85,12 @@ class AddCity extends React.Component {
 										Search
 									</a>
 								</Link>
-								<Link to="/cities">
-									<a
-										className="w-100 f6 link grow ba ph3 pv2 mb2 dib tc black"
-										onClick={props.submitCity(props)}
-									>
-										Save City
-									</a>
-								</Link>
+								<a
+									className="w-100 f6 link grow ba ph3 pv2 mb2 dib tc black"
+									onClick={props.submitCity(props)}
+								>
+									Save City
+								</a>
 							</form>
 						</main>
 					</div>
@@ -137,7 +132,18 @@ function mapActionsToProps(dispatch) {
 		dispatch,
 		submitCity: props => {
 			return e => {
-				dispatch(createCity)
+				if (
+					props._id !== '' &&
+					props.name.length !== 0 &&
+					props.sites[0].length !== 0 &&
+					props.content.length !== 0 &&
+					props.description.length !== 0
+				) {
+					dispatch(createCity)
+					history.push('/cities')
+				} else {
+					window.alert('Please fill in every field to save a city.')
+				}
 			}
 		},
 		handleName: e => doDispatch('NAME', e.target.value),
@@ -154,7 +160,8 @@ function mapStateToProps(state) {
 		_id: state.city._id,
 		sites: state.city.sites,
 		description: state.city.description,
-		content: state.city.content
+		content: state.city.content,
+		numbers: state.numbers
 	}
 }
 const connector = connect(mapStateToProps, mapActionsToProps)

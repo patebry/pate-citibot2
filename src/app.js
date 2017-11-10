@@ -8,8 +8,8 @@ import EditCity from './pages/cities/edit'
 import Login from './pages/login'
 import history from './history'
 import Callback from './pages/callback'
-
 import Auth from './auth'
+
 const auth = new Auth()
 
 const handleAuthentication = (nextState, replace) => {

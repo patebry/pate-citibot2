@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-fetch'
-import { SET_CITIES, SET_CITY, SET_NUMBERS } from './constants'
+const fetch = require('isomorphic-fetch')
+const { SET_CITIES, SET_CITY, SET_NUMBERS } = require('./constants')
 
 const apiURL = 'http://localhost:4000'
 
@@ -81,7 +81,9 @@ export const removeCity = e => (dispatch, getState) => {
 }
 
 export const getNumbers = areaCode => (dispatch, getState) => {
-	fetch(apiURL + '/numbers/' + areaCode, getOptions(getState()))
-		.then(res => res.json())
-		.then(data => dispatch({ type: SET_NUMBERS, payload: data }))
+	if (areaCode.length !== 0 && !isNaN(areaCode)) {
+		fetch(apiURL + '/numbers/' + areaCode, getOptions(getState()))
+			.then(res => res.json())
+			.then(data => dispatch({ type: SET_NUMBERS, payload: data }))
+	}
 }
