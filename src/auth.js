@@ -16,7 +16,7 @@ export default class Auth {
 		this.auth0.authorize()
 	}
 
-	importructor() {
+	constructor() {
 		this.login = this.login.bind(this)
 		this.logout = this.logout.bind(this)
 		this.handleAuthentication = this.handleAuthentication.bind(this)
